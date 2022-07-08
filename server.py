@@ -50,7 +50,7 @@ def init():
     dc = DatasetCatalog.get("train_dataset")  # Must include
     cfg = get_cfg()
     cfg.merge_from_file(model_zoo.get_config_file(PATH['faster_rcnn_X_101_32x8d_FPN_3x']))
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.1
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
     cfg.MODEL.WEIGHTS = PATH['model']
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = 4
     dp = DefaultPredictor(cfg)
@@ -97,7 +97,7 @@ class DetectRequestHandler(BaseRequestHandler):
             }
         except:
             response = {
-                'code': 1,
+                'code': 1
             }
         self.set_header('Content-type', 'application/json')
         self.write(bytes(json.dumps(response), 'utf-8'))
